@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 
 public class App {
@@ -11,8 +12,9 @@ public class App {
     JTextArea textArea=new JTextArea();
 
     //构造方法
-    int x=300;
-    int y=700;
+    int x=250;
+    int y=610;
+    Random random=new Random();
     public App() {
 
         textArea.addKeyListener(new KeyAdapter() {
@@ -21,16 +23,33 @@ public class App {
                 super.keyPressed(e);
                 //上
                 if (e.getKeyCode() == KeyEvent.VK_UP){
-                    label_plane.setBounds(x,(y=y-30),64,64);
+
+                    if (y>0){
+                        y=y-20;
+                        label_plane.setBounds(x,y,64,64);
+                    }
                 }//下
                 if (e.getKeyCode() == KeyEvent.VK_DOWN){
-                    label_plane.setBounds(x,(y=y+30),64,64);
+
+                    if (y<616){
+                        y=y+20;
+                        label_plane.setBounds(x,y,64,64);
+                    }
                 }//左
                 if (e.getKeyCode() == KeyEvent.VK_LEFT){
-                    label_plane.setBounds((x=x-20),y,64,64);
+
+                    if (x>0){
+                        x=x-20;
+                        label_plane.setBounds(x,y,64,64);
+                    }
                 }//右
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT){
-                    label_plane.setBounds((x=x+20),y,64,64);
+
+                    if (x<426){
+                        x=x+20;
+                        label_plane.setBounds(x,y,64,64);
+                    }
+
                 }
             }
         });
@@ -43,7 +62,7 @@ public class App {
         label_plane.setBounds(x,y,64,64);
         java.net.URL ImgBack= App.class.getResource("img/background.png");
         label_background.setIcon(new ImageIcon(ImgBack));
-        label_background.setBounds(0,0,600,800);
+        label_background.setBounds(0,0,512,720);
 
 
         JFrame frame = new JFrame("飞机大战");
@@ -53,7 +72,7 @@ public class App {
         myPanel.add(textArea);
         frame.setContentPane(myPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(100,100,600,800);
+        frame.setBounds(100,100,512,720);
         //frame.pack();
         frame.setVisible(true);
     }
