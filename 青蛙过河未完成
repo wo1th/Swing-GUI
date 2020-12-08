@@ -1,0 +1,196 @@
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class App {
+    JPanel myPanel=new JPanel();
+    //背景
+    JLabel label_background=new JLabel();
+    //青蛙
+    JLabel label_frog0=new JLabel();
+    JLabel label_frog1=new JLabel();
+    JLabel label_frog2=new JLabel();
+    //分数
+    JLabel label_score=new JLabel();
+    JTextArea textArea_UserInput=new JTextArea();
+    //文字
+    JLabel label_text0=new JLabel();
+    JLabel label_text1=new JLabel();
+    JLabel label_text2=new JLabel();
+    int  score=0,score1=0,score2=0,score3=0;
+    int cell=128;
+    int level=0;
+    //青蛙跳位置
+    int coor[][]={
+            {412,286},//第一个位置
+            {265,125},//第二个位置
+            {913,36,752,36,689,22},//岸边位置
+    };
+    //荷叶文字坐标
+    int xy[][]={
+            {416,344},
+            {268,170},
+            {656,86}
+    };
+    //荷叶文字
+    String array2d_gameMap[][]={
+        {"hello","world","hi"},
+        {"morning","afternoon","night"},
+        {"tomy","jery","uncle"},
+        {"abc","def","ghi"},
+        {"345","678","123"},
+    };
+
+    //构造方法
+    public App() {
+        myPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                textArea_UserInput.append(String.valueOf(e.getKeyChar()));
+
+                if (level==0){
+                    //label_text0.setText(array2d_gameMap[][]);
+                    //array2d_gameMap数组随机组
+                    for (int row = 0; row < array2d_gameMap.length; row++) {
+                        for (int column = 0; column < array2d_gameMap[row].length; column++) {
+                            label_text0.setBounds(xy[0][0],xy[0][1],100,50);
+                            label_text0.setText(array2d_gameMap[row][0]);
+                            System.out.println(array2d_gameMap[row][0]);
+                        }
+                        System.out.println("");
+                    }
+                    for (int row = 0; row < array2d_gameMap.length; row++) {
+                        for (int column = 0; column < array2d_gameMap[row].length; column++) {
+                            label_text1.setBounds(xy[1][0],xy[1][1],100,50);
+                            label_text1.setText(array2d_gameMap[row][1]);
+                            System.out.println(array2d_gameMap[row][1]);
+                        }
+                        System.out.println("");
+                    }
+                    for (int row = 0; row < array2d_gameMap.length; row++) {
+                        for (int column = 0; column < array2d_gameMap[row].length; column++) {
+                            label_text2.setBounds(xy[2][0],xy[2][1],100,50);
+                            label_text2.setText(array2d_gameMap[row][2]);
+                            System.out.println(array2d_gameMap[row][2]);
+                        }
+                        System.out.println("");
+                    }
+
+
+                    if (textArea_UserInput.getText().equals(array2d_gameMap[0][0])){
+                        label_frog0.setBounds(coor[0][0],coor[0][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if(label_frog0.getX()==coor[0][0] && label_frog0.getY()==coor[0][1]&&textArea_UserInput.getText().equals("world")){
+                        label_frog0.setBounds(coor[1][0],coor[1][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if (label_frog0.getX()==coor[1][0]&&label_frog0.getY()==coor[1][1]&&textArea_UserInput.getText().equals("hi")){
+                        label_frog0.setBounds(coor[2][0],coor[2][1],cell,cell);
+                        level++;
+                        textArea_UserInput.setText("");
+                    }
+                }
+                if (level==1){
+                    if (textArea_UserInput.getText().equals("hello")){
+                        label_frog1.setBounds(coor[0][0],coor[0][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if(label_frog1.getX()==coor[0][0] && label_frog1.getY()==coor[0][1]&&textArea_UserInput.getText().equals("world")){
+                        label_frog1.setBounds(coor[1][0],coor[1][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if (label_frog1.getX()==coor[1][0]&&label_frog1.getY()==coor[1][1]&&textArea_UserInput.getText().equals("hi")){
+                        label_frog1.setBounds(coor[2][2],coor[2][3],cell,cell);
+                        level++;
+                        textArea_UserInput.setText("");
+                    }
+                }
+                if (level==2){
+                    if (textArea_UserInput.getText().equals("hello")){
+                        label_frog2.setBounds(coor[0][0],coor[0][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if(label_frog2.getX()==coor[0][0] && label_frog2.getY()==coor[0][1]&&textArea_UserInput.getText().equals("world")){
+                        label_frog2.setBounds(coor[1][0],coor[1][1],cell,cell);
+                        textArea_UserInput.setText("");
+                    }
+                    if (label_frog2.getX()==coor[1][0]&&label_frog2.getY()==coor[1][1]&&textArea_UserInput.getText().equals("hi")){
+                        label_frog2.setBounds(coor[2][4],coor[2][5],cell,cell);
+                        level++;
+                        textArea_UserInput.setText("");
+                    }
+                }
+            }
+        });
+
+        myPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("x"+e.getX()+","+"y"+e.getY());
+            }
+        });
+    }
+    //显示窗体方法
+    void go(){
+        textArea_UserInput.setText("");
+        textArea_UserInput.setBounds(0,0,300,50);
+        textArea_UserInput.setVisible(true);
+        myPanel.add(textArea_UserInput);
+
+        java.net.URL imgURL = App.class.getResource("img/background1.png");
+        label_background.setIcon(new ImageIcon(imgURL));
+        label_background.setBounds(0,0,1024,600);
+
+        label_text0.setText("1");
+        label_text0.setBounds(xy[0][0],xy[0][1],100,50);
+        label_text1.setText("2");
+        label_text1.setBounds(xy[1][0],xy[1][1],100,50);
+        label_text2.setText("3");
+        label_text2.setBounds(xy[2][0],xy[2][1],100,50);
+
+        java.net.URL imgURL2 = App.class.getResource("img/frog.png");
+        label_frog0.setIcon(new ImageIcon(imgURL2));
+        label_frog0.setBounds(0,430,cell,cell);
+        label_frog1.setIcon(new ImageIcon(imgURL2));
+        label_frog1.setBounds(70,430,cell,cell);
+        label_frog2.setIcon(new ImageIcon(imgURL2));
+        label_frog2.setBounds(140,430,cell,cell);
+
+
+
+
+        label_score.setText("得分：0");
+        label_score.setBounds(400,0,200,50);
+        myPanel.add(label_score);
+        myPanel.add(label_frog0);
+        myPanel.add(label_frog1);
+        myPanel.add(label_frog2);
+
+        myPanel.add(label_text0);
+        myPanel.add(label_text1);
+        myPanel.add(label_text2);
+
+        myPanel.add(label_background);
+
+
+
+
+        //
+        JFrame frame = new JFrame("青蛙过河");
+        myPanel.setLayout(null);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,1024,600);
+        //frame.pack();
+        frame.setVisible(true);
+        myPanel.setFocusable(true);//键盘监听必须加panel面板的焦点获取才可以
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
