@@ -12,8 +12,10 @@ public class App {
     void fibon(){
         Scanner scanner=new Scanner(System.in);
         int a=scanner.nextInt();
-        if (a >=1 && a<=40) {
+        if (a>=1 && a<=40) {
             System.out.printf("%d 的斐波那契数是: %d\n",a, fibonacci(a));
+        }else{
+            System.out.println("输入的数大于40");
         }
     }
     public static void main(String[] args) {
